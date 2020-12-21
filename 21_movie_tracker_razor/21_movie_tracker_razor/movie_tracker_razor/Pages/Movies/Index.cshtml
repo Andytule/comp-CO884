@@ -1,0 +1,36 @@
+﻿@page
+@model movie_tracker_razor.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        Genre: <select asp-for="MovieGenre" asp-items="Model.Genres">
+                   <option value="">All</option>
+               </select>
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </p>
+</form>
+
+<div class="card-columns">
+    @foreach (var item in Model.Movie)
+    {
+        <a asp-page="./Details" asp-route-id="@item.Id">
+            <div class="card" style="widthL 18rem;">
+                <img src="~/images/@item.ImageFile" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title text-center text-body">@item.Title</h5>
+                </div>
+            </div>
+        </a>
+    }
+</div>
